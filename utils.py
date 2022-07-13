@@ -100,7 +100,7 @@ def BuildDatabase(path):
     name = "{path}\\database.json".format(path=path)
     Save(name, data)
 
-def find_cost_low_audio(audios, video, count=1, accept_short=1, accept_long=6, is_long=20, short_loop=1, long_loop=1, stoped=0):
+def find_cost_low_audio(audios, video, count=1, accept_short=1, accept_long=1, is_long=15, short_loop=1, long_loop=1, stoped=0):
     video_duration = float(video.duration)
     audio_min = audios[0].duration/video_duration
     loop_size = video_duration*count
@@ -113,10 +113,12 @@ def find_cost_low_audio(audios, video, count=1, accept_short=1, accept_long=6, i
         else:
             au = next(item for item in audios if loop_size > item.duration and (math.floor(loop_size-item.duration))<accept_short and item.count < short_loop)
         if au != None:
+            print("video : {info}".format(info=video.filename))
             print("video_duration: {info}".format(info=video_duration))
             #print("audio_duration: {info}".format(info=audio_duration))
             print("video looped duration: {info}".format(info=loop_size))
             audio_duration = float(au.duration)
+            print("new audio: {info}".format(info=au.filename))
             print("new audio_duration: {info}, used: {cnt}".format(info=audio_duration, cnt=au.count))
             au.count = au.count +1
             audio = au
@@ -125,9 +127,17 @@ def find_cost_low_audio(audios, video, count=1, accept_short=1, accept_long=6, i
         current = count + 1
         is_long_duration = video_duration > is_long
         if is_long_duration:
-            return find_cost_low_audio(audios, video, 1, accept_short, accept_long, is_long, short_loop, long_loop+1, stoped + 1)
+            if accept_long < 6:
+                return find_cost_low_audio(audios, video, 1, accept_short, accept_long+1, is_long, short_loop, long_loop, stoped + 1)
+            else:
+                return find_cost_low_audio(audios, video, 1, accept_short, accept_long, is_long, short_loop, long_loop+1, stoped + 1)
+
         elif loop_size > is_long:
-            return find_cost_low_audio(audios, video, current, accept_short, accept_long, is_long, short_loop, long_loop+1, stoped + 1)
+            if accept_long < 6:
+                return find_cost_low_audio(audios, video, count, accept_short, accept_long+1, is_long, short_loop, long_loop, stoped + 1)
+            else:
+                return find_cost_low_audio(audios, video, count, accept_short, accept_long, is_long, short_loop, long_loop+1, stoped + 1)
+
         else:
             if loop_size > audio_min*current:
                 if accept_short+1 > short_loop:
@@ -139,24 +149,28 @@ def find_cost_low_audio(audios, video, count=1, accept_short=1, accept_long=6, i
         return find_cost_low_audio(audios, video, current, accept_short, accept_long, is_long, short_loop, long_loop, stoped + 1)
     return audio_duration, count, audio, video_duration
 
-def MergeVideoByAudioDuration(audios, viedos, input_dir=""):
+def MergeVideoByAudioDuration(audios, viedos, input_dir="", transcode = True):
     id = 0
     looped = 1
     for video in viedos:
         audio_duration, loop, audio, video_duration = find_cost_low_audio(audios, video, 1)
-        #continue
-
+        
         loop_dir = video.dir.replace("opai", "opai_loop")
         merge_dir = video.dir.replace("opai", "opai_merge")
-        pathlib.Path(loop_dir).mkdir(parents=True, exist_ok=True)
-        pathlib.Path(merge_dir).mkdir(parents=True, exist_ok=True)
     
         vid_loop = video.filename.replace("opai", "opai_loop")
         vid_merge = video.filename.replace("opai", "opai_merge")
+        pathlib.Path(loop_dir).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(merge_dir).mkdir(parents=True, exist_ok=True)
         if video_duration < audio_duration:
-            TranscodeLoopVideo(video.filename, vid_loop, str(loop))
+            print ("video loop:{count}".format(count=loop))
+            print("ffmpeg -y -stream_loop {times} -i {file} -c copy -f mp4 {output}".format(times=loop-1, file=video.filename, output=vid_loop))
+            if transcode:
+                TranscodeLoopVideo(video.filename, vid_loop, str(loop-1))
         else:
             vid_loop = video.filename
+        if transcode is not True:
+            continue
         TranscodeMergeAudioVideo(vid_loop, audio.filename, vid_merge)
     count = 0
     for au in audios:
