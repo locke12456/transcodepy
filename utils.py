@@ -192,9 +192,12 @@ def LoadDatabase(file):
     print("short: {num}".format(num=len(viedo_short)))
     audio = sorted(fast, key=lambda d: d.duration)
     video = sorted(viedo_short, key=lambda d: d.duration)
+    #MergeVideoByAudioDuration(audio, video)
+    return audio, video
     #print("long: {num}".format(num=len(viedo_long)))
     #print("very long: {num}".format(num=len(viedo_very_long)))
-    MergeVideoByAudioDuration(audio, video)
+    
+    
     #MergeVideoByAudioDuration(slow, viedo_long)
     #MergeVideoByAudioDuration(fast, viedo_very_long)
 def Save(file, data):

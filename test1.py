@@ -2,47 +2,43 @@ import unittest
 
 class Test_test1(unittest.TestCase):
     def test_A(self):
-        arr = [
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/lxy.FBX", CHName = "[color=#7FFFD4]李逍遥[/color]",Role = "Spr/Npc/lxy.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/hy.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/x.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/jl.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/ws.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/zle.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/XM.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/anu.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/lyr.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/llb.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/lly.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/wyy.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/mcl.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc1/yj.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/bbl.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/ganyu.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/hutao.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/keli.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/y.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/YX.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/cp.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/JG.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc2/SL.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc3/Aqua.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc3/Megumin.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc3/Darkness.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc4/zx.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc4/lk.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc4/xj.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-'n = {id} ,Mod = "Mod/Npc/Human/Npc4/hlk/lk.FBX", CHName = "[color=#7FFFD4]{id}[/color]",Role = "Spr/H/{id}.png"',
-            ]
-        menu_data = '<li><Display>{id}</Display><OKResult>me:AddModifier("Female_Model_Change_{id}", false);</OKResult></li>'
-        xml_data = '<Modifier Name="Female_Model_Change_{id}" Type="Normal"><ModScale>0.3</ModScale><MaxStack>0</MaxStack><Duration>1</Duration><Display>0</Display><Desc>{id}</Desc><LuaClassName>Female_Model_Change_Lua_2112</LuaClassName></Modifier>'
-        for i in range(1, len(arr)+1):
-            print(arr[i-1].format(id=i))
-        for i in range(1, len(arr)+1):
-            print(menu_data.format(id=i))
-        for i in range(1, len(arr)+1):
-            print(xml_data.format(id=i))
-        
+
+        #id = TranscodeAudio("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "", 0, 6)
+        #id = TranscodeAudioVideo("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "")
+        #id = TranscodeVideoLoopMergeAudio("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "G:\\code\\python\\mv_pic\\mv_pic\\sound", "2",".mp4")
+        #id = TranscodeVideoMerge("G:\\code\\python\\mv_pic\\mv_pic\\conc", ".mp4")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap03", "", "13")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap04", "", "14")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap05", "", "15")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap06", "", "16")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap07", "", "17")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap08", "", "18")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap09", "", "19")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap10", "", "20")
+        #id = TranscodeVideoOnly("G:\\code\\python\\mv_pic\\mv_pic\\Cap11", "", "21")
+        #id = TranscodeVideoLoop("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "5", "mp4")
+        #id = TranscodeVideoLoop("G:\\code\\python\\mv_pic\\mv_pic\\play", "3", "mp4", id)
+        #id = TranscodeVideo("G:\\code\\python\\mv_pic\\mv_pic\\movie", False, 1)
+        #BuildDatabase("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai")
+        #LoadDatabase("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai\\database.json")
+        #id = 1
+        #id = MakeVideoByPath("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\1280x720", id, "Shuangxiu" )
+        #id = MakeVideoByPath("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\1920x1080", id, "Shuangxiu" )                                                        
+        #id = MakeVideoByPath("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\800x600", id, "Shuangxiu" )
+        #id = MakeVideoByPath("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\1024x768", id, "Shuangxiu" )
+        #id = MakeVideoByPath("G:\\code\\python\\mv_pic\\mv_pic\\finished\\ani", id, "Shuangxiuyuehui" )
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\finished\\05", False, id)
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\finished\\06", False, id)
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\finished\\07", False, id)
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\finished\\Cap01", False, id)
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\finished\\Cap02", False, id)
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\finished\\Capture", False, id)
+        #id = MakeVideo("G:\\code\\python\\mv_pic\\mv_pic\\Capture", False, id)
+        #TransPic("G:\\code\\python\\mv_pic\\mv_pic\\char","origin", False, 300, 450)
+        #MakePic("G:\\code\\python\\mv_pic\\mv_pic\\pic", False, 101, 230)
+        #id = TranscodeVideoMerge("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\1024x768\\20", ".mp4")
+        #id = TranscodeVideoMerge("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\1024x768\\Cap01", ".mp4")
+        #id = TranscodeVideoMerge("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai_merge\\1024x768\\Cap02", ".mp4")
         self.fail("Not implemented")
 
 if __name__ == '__main__':

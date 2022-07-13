@@ -13,7 +13,3 @@ def Resize(audioNum, audioPath, duration, trans):
     info = utils.GetInfo(audio_temp)
     duration = float(info["format"]["duration"])
     return audio_temp, audio_temp1, duration
-
-#BuildDatabase("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai")
-#utils.LoadDatabase("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai\\database.json")
-#data = MediaInfo(info)
