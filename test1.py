@@ -2,7 +2,8 @@ import unittest
 
 class Test_test1(unittest.TestCase):
     def test_A(self):
-
+        au,vi = LoadDatabase("G:\\code\\python\\mv_pic\\mv_pic\\finished\\opai\\database.json")
+        MergeVideoByAudioDuration(au, vi)
         #id = TranscodeAudio("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "", 0, 6)
         #id = TranscodeAudioVideo("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "")
         #id = TranscodeVideoLoopMergeAudio("G:\\code\\python\\mv_pic\\mv_pic\\transcode", "G:\\code\\python\\mv_pic\\mv_pic\\sound", "2",".mp4")

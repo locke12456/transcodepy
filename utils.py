@@ -99,19 +99,19 @@ def BuildDatabase(path):
             data["only_audio"][name].append(media_data)
     name = "{path}\\database.json".format(path=path)
     Save(name, data)
-def find_cost_low_audio(audios, video, count = 1):
-    #audio_duration = float(audio.duration)
+
+def find_cost_low_audio(audios, video, count=1, accept_short=1, accept_long=6, is_long=20, short_loop=1, long_loop=1, stoped=0):
     video_duration = float(video.duration)
+    audio_min = audios[0].duration/video_duration
     loop_size = video_duration*count
     audio = None
-    
-    #if video_duration < audio_duration:
     try:
-        if video_duration > 20:
+        if video_duration > is_long or loop_size > is_long:
+            vid = loop_size if loop_size > is_long else video_duration
             #aus = sorted(audios, reverse=lambda d: d.duration)
-            au = next(item for item in audios if video_duration > item.duration and math.floor(video_duration-item.duration)<6 and item.count < 2)
+            au = next(item for item in audios if vid > item.duration and math.floor(vid-item.duration)<accept_long and item.count < long_loop)
         else:
-            au = next(item for item in audios if loop_size > item.duration and (math.floor(loop_size-item.duration))<1 and item.count < 3)
+            au = next(item for item in audios if loop_size > item.duration and (math.floor(loop_size-item.duration))<accept_short and item.count < short_loop)
         if au != None:
             print("video_duration: {info}".format(info=video_duration))
             #print("audio_duration: {info}".format(info=audio_duration))
@@ -121,21 +121,31 @@ def find_cost_low_audio(audios, video, count = 1):
             au.count = au.count +1
             audio = au
     except:
-        return find_cost_low_audio(audios, video, count + 1)
+        # for next() not found exception
+        current = count + 1
+        is_long_duration = video_duration > is_long
+        if is_long_duration:
+            return find_cost_low_audio(audios, video, 1, accept_short, accept_long, is_long, short_loop, long_loop+1, stoped + 1)
+        elif loop_size > is_long:
+            return find_cost_low_audio(audios, video, current, accept_short, accept_long, is_long, short_loop, long_loop+1, stoped + 1)
+        else:
+            if loop_size > audio_min*current:
+                if accept_short+1 > short_loop:
+                    return find_cost_low_audio(audios, video, current, accept_short, accept_long, is_long, short_loop+1, long_loop, stoped + 1)
+                else:
+                    return find_cost_low_audio(audios, video, current, accept_short+1, accept_long, is_long, short_loop, long_loop, stoped + 1)
+            elif stoped > len(audios):
+                return find_cost_low_audio(audios, video, count, accept_short, accept_long, is_long, short_loop+1, long_loop, 0)
+        return find_cost_low_audio(audios, video, current, accept_short, accept_long, is_long, short_loop, long_loop, stoped + 1)
     return audio_duration, count, audio, video_duration
 
-def MergeVideoByAudioDuration(audios, viedos):
+def MergeVideoByAudioDuration(audios, viedos, input_dir=""):
     id = 0
     looped = 1
     for video in viedos:
-        #audio = audios[id]
-        #id = id+1
-        #if id % len(audios) == 0:
-        #    id = 0
-        #    looped = looped+1
-
         audio_duration, loop, audio, video_duration = find_cost_low_audio(audios, video, 1)
         #continue
+
         loop_dir = video.dir.replace("opai", "opai_loop")
         merge_dir = video.dir.replace("opai", "opai_merge")
         pathlib.Path(loop_dir).mkdir(parents=True, exist_ok=True)
